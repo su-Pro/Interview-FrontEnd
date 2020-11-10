@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <span id="first-child">
+      <a href=""></a>
+    </span>
+    <div id="second-child">
+      <span id="inner-child"></span>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+// 放在这里是为了在执行时获取到上面DOM元素
+const targetDOM = document.getElementById('container');
+
+//---- generator ----
+
+// 不使用cb方式进行操作，改用yield
+function* traverseByGenerator (element) {
+    yield element; // 这个就是每次外面获取到的节点
+    element = element.firstElementChild;
+    while (element) {
+        yield * traverseByGenerator(element); // 会依次执行,等同于递归逻辑
+        element = element.nextElementSibling;
+    }
+}
+for(let element of traverseByGenerator(targetDOM)) {
+//    此时的element就是yield后边返回的迭代器的value！
+//     伪代码： cb(element);
+//    总结：生成器代替递归的好处在于：可以对外暴露函数内部的值...(解释不好，就是向外暴露访问能力)
+}
+
+//---- generator ----
+/**
+ * 递归方式进行遍历DOM树
+ * @param dom
+ * @param cb
+ */
+function traverse(dom,cb) {
+    cb(dom);
+//    遍历该树
+    let node = dom.firstElementChild;
+    while(node) {
+        traverse(node,cb);
+    //    如果node不存在后，会自动自动执行到这里
+    //    此时需要将node 移动到旁边节点，再次进行递归操作
+        node = node.nextElementSibling;
+    }
+}
+traverse(targetDOM,function(dom) {
+    console.log(dom.id)
+})
+</script>
