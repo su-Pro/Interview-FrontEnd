@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+    :root,body {
+        height: 100%;
+    }
+  .container {
+      width: 100%;
+      height: 100%;
+      background: grey;
+      overflow: hidden;
+      position: relative;
+  }
+  .center {
+      width: 100px;
+      height: 100px;
+      background: black;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      margin-left: -50px;
+      margin-top: -50px;
+  }
+  .none-width-center {
+      /*必须是相对父元素*/
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+  }
+  .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+</style>
+<body>
+<div class="container flex-center">
+  <div class="">center</div>
+</div>
+</body>
+</html>

@@ -13,7 +13,7 @@ function co(generator) {
         if(iteratorRes.done) { return }
         const iteratorValue = iteratorRes.value;
         if(iteratorValue instanceof Promise) {
-            iteratorValue.then(res => handle(iterator.next(res)))
+            iteratorValue.then(res => handle(iterator.next(res)))  // 赋值给等号左侧的变量
             iteratorValue.catch(error => iterator.catch(error))
         }
     }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="root">
+  <p>我是一段描述信息</p>
+  <ul>
+    <li><a href="">我是一个带a标签的li</a></li>
+    <li>li2</li>
+    <li>li3</li>
+  </ul>
+</div>
+<script>
+    //---- generator ----
+
+    // 不使用cb方式进行操作，改用yield
+    function* traverseByGenerator(element) {
+        yield element; // 这个就是每次外面获取到的节点
+        element = element.firstElementChild;
+        while (element) {
+            yield* traverseByGenerator(element); // 会依次执行,等同于递归逻辑
+            element = element.nextElementSibling;
+        }
+    }
+
+    for (let element of traverseByGenerator(targetDOM)) {
+//    此时的element就是yield后边返回的迭代器的value！
+//     伪代码： cb(element);
+//    总结：生成器代替递归的好处在于：可以对外暴露函数内部的值...(解释不好，就是向外暴露访问能力)
+    }
+
+    //---- generator ----
+
+    function traverseDOM(node, cb) {
+        if (node && node.nodeType === 1) {
+            cb(node)
+        }
+        //  获取所有子节点，分别进行递归遍历。
+        //  先取第一个子节点
+        var i = 0,
+          childrenLen = node.childElementCount,
+          node = node.firstElementChild;
+        for (; i < childrenLen; i++) {
+            traverseDOM(node, cb)
+            //  当达到叶子节点时，需要移动到旁边节点
+            node = node.nextElementSibling;
+        }
+    }
+
+    // traverseDOM(document.getElementsByClassName("root")[0],function (node) {
+    //     console.log(node.tagName)
+    // })
+
+    function traverseDOMbyTraverseAPI(node, cb) {
+        /**
+         * 自带DFS回溯能力
+         * @type {TreeWalker}
+         */
+        var treeTraver = document.createTreeWalker(node, NodeFilter.SHOW_ELEMENT, {
+            acceptNode(node) {
+                if (node && node.nodeType === 1) {
+                    return NodeFilter.FILTER_ACCEPT
+                }
+            }
+        }, false)
+        cb(treeTraver.currentNode);
+        node = treeTraver.nextNode();
+        while (node) {
+            cb(node);
+            node = treeTraver.nextNode();
+        }
+    }
+
+    traverseDOMbyTraverseAPI(document.getElementsByClassName("root")[0], function (node) {
+        console.log(node.tagName)
+    })
+</script>
+</body>
+</html>

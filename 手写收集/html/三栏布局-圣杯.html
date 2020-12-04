@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+      :root, body {
+          margin: 0;
+          height: 100%;
+      }
+
+      .wrapper {
+          height: 100%;
+          padding: 0 100px 0 100px;
+      }
+
+      .col {
+          float: left;
+          position: relative;
+      }
+
+      .main {
+          height: 100%;
+          width: 100%;
+          background: grey;
+      }
+
+      .left {
+          height: 100%;
+          width: 100px;
+          background: red;
+          margin-left: -100%;
+          left: -100px;
+      }
+
+      .right {
+          height: 100%;
+          width: 100px;
+          background: blue;
+          margin-left: -100px;
+          right: -100px;
+      }
+  </style>
+</head>
+<body>
+<section class="wrapper">
+  <section class="main col"></section>
+  <aside class="left col"></aside>
+  <aside class="right col"></aside>
+</section>
+</body>
+</html>

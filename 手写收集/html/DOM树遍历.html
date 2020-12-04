@@ -22,24 +22,8 @@
 // 放在这里是为了在执行时获取到上面DOM元素
 const targetDOM = document.getElementById('container');
 
-//---- generator ----
+const obserber = new MutationObserver(() => {});
 
-// 不使用cb方式进行操作，改用yield
-function* traverseByGenerator (element) {
-    yield element; // 这个就是每次外面获取到的节点
-    element = element.firstElementChild;
-    while (element) {
-        yield * traverseByGenerator(element); // 会依次执行,等同于递归逻辑
-        element = element.nextElementSibling;
-    }
-}
-for(let element of traverseByGenerator(targetDOM)) {
-//    此时的element就是yield后边返回的迭代器的value！
-//     伪代码： cb(element);
-//    总结：生成器代替递归的好处在于：可以对外暴露函数内部的值...(解释不好，就是向外暴露访问能力)
-}
-
-//---- generator ----
 /**
  * 递归方式进行遍历DOM树
  * @param dom

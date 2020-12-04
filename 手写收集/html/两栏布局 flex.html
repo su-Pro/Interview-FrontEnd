@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root,body {
+      height: 100%;
+      margin: 0px;
+    }
+    .container {
+      height: 100%;
+      display: flex;
+    }
+    .left {
+      height: 100%;
+    } 
+    .right {
+      flex-grow: 1;
+      height: 100%;
+    }   
+    .fixed-300 {
+      flex-basis: 300px;
+    }
+    .margin-right-10 {
+      margin-right: 10px;
+    }
+    .margin-left-10 {
+      margin-left: 10px;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left fixed-300 red margin-right-10"></div>
+    <div class="right blue margin-left-10"></div>
+  </div>
+</body>
+</html>

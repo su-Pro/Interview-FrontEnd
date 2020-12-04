@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* .clear {
+      overflow: hidden;
+    } */
+    :root,body {
+      margin: 0px;
+      height: 100%;
+    }
+    .container {
+      height: 100%;
+    }    
+    .left {
+      width: 300px;
+      float: left;
+      height: 100%;            
+    }
+    .right {
+      height: 100%;
+      overflow: hidden;
+    }
+    .clear ::after {
+      clear: both;
+      content: "";
+      display: block;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+    }
+    .marign-right-10 {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container clear">
+    <div class="left red marign-right-10"></div>
+    <div class="right blue"></div>
+  </div>
+</body>
+</html>

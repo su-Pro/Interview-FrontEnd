@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="container">
+  <li>li-1</li>
+  <li>li-2</li>
+  <li>li-3</li>
+  <li>li-4</li>
+</ul>
+<script>
+  const container = document.getElementById("container");
+  function handleClick (e) {
+      debugger;
+      const curNode = e.target;
+      if(curNode.nodeName === "LI") {
+          console.log(curNode.innerText)
+      }
+  }
+  document.addEventListener("click", handleClick,false);
+  window.addEventListener("unload", function () {
+      document.removeEventListener('click',handleClick,false);
+  })
+</script>
+</body>
+</html>
